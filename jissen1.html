@@ -1,32 +1,39 @@
 <!doctype html>
 <html lang="ja">
 <head>
-    <meta charset="UTF-8">
-    <title>健康管理サイト</title>
-    <meta name="description" content="HTMLの練習">
+  <meta charset="UTF-8">
+  <title>健康管理サイト</title>
+  <meta name="description" content="HTMLの練習">
+  <style>
+    body { font-family: sans-serif; padding: 20px; }
+    label { display: block; margin-top: 10px; }
+    #result { margin-top: 30px; border-top: 1px solid #ccc; padding-top: 20px; }
+    h1, h2 { margin-bottom: 10px; }
+  </style>
 </head>
 <body>
-    <h1>今日の食事量</h1>
+  <h1>今日の食事量</h1>
+  <form id="mealForm">
+    <label>名前：<input type="text" id="name" required></label>
+    <label>食事内容：<input type="text" id="meal"></label>
+    <label>カロリー（kcal）：<input type="number" id="calories"></label>
+    <button type="submit">送信</button>
+  </form>
 
-    <!-- ユーザー入力フォームの追加 -->
-    <form action="#" method="post"> <!--ダミー送信--> 
-        <label for="username">名前：</label><br>
-        <input type="text" id="username" name="username" required><br><br>
+  <div id="result" style="display:none;">
+    <h2 id="outputName">〇〇さん</h2>
+    <p id="outputCalories">100kcal</p>
+  </div>
 
-        <label for="meal">食事内容：</label><br>
-        <input type="text" id="meal" name="meal" required><br><br>
-
-        <label for="calories">カロリー (kcal)：</label><br>
-        <input type="number" id="calories" name="calories" required><br><br>
-
-        <input type="submit" value="送信">
-    </form>
-
-    <hr>
-
-    <!-- 入力結果の表示（仮） -->
-    <h2>○○さん</h2>
-    <p>100kcal</p>
-
+  <script>
+    document.getElementById("mealForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      const name = document.getElementById("name").value || "〇〇";
+      const calories = document.getElementById("calories").value || "100";
+      document.getElementById("outputName").textContent = name + "さん";
+      document.getElementById("outputCalories").textContent = calories + "kcal";
+      document.getElementById("result").style.display = "block";
+    });
+  </script>
 </body>
 </html>
